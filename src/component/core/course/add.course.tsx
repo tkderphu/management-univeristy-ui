@@ -1,38 +1,19 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import React, {useState} from "react";
-import {AuthenRequest} from "./model/authen.request";
-import AuthenService from "./api-call/authen.service";
 
-function LoginComponent() {
-    const [loginRequest, setLoginRequest]
-        = useState<AuthenRequest>({
-        password: '',
-        username: ''
-    })
+
+function AddCourseComponent() {
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setLoginRequest((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+     
     };
 
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log("Login Request:", loginRequest);
-        AuthenService.authenticate(loginRequest)
-            .then(response => {
-
-            })
-            .catch(err => {
-
-            })
+        
     };
 
     return (
@@ -46,17 +27,17 @@ function LoginComponent() {
                 }}
             >
                 <Typography component="h1" variant="h5">
-                    Đăng nhập
+                    Add Course
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
                         margin="normal"
                         required
                         fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        autoComplete="username"
+                        id="courseId"
+                        label="Course Id"
+                        name="courseId"
+                        autoComplete="courseId"
                         onChange={handleChange}
                         autoFocus
                     />
@@ -64,11 +45,11 @@ function LoginComponent() {
                         margin="normal"
                         required
                         fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
+                        name="name"
+                        label="Name"
+                        type="name"
+                        id="name"
+                        autoComplete="current-name"
                         onChange={handleChange}
                     />
                     <Button
@@ -79,16 +60,9 @@ function LoginComponent() {
                     >
                         Đăng nhập
                     </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="/forgot-password" variant="body2">
-                                Quên mật khẩu?
-                            </Link>
-                        </Grid>
-                    </Grid>
                 </Box>
             </Box>
         </Container>
     );
 }
-export default LoginComponent;
+export default AddCourseComponent;

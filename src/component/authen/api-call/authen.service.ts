@@ -4,65 +4,40 @@ import { AuthenRequest } from "../model/authen.request";
 import { ChangePasswordRequest } from "../model/change.password.request";
 import { ForgetPasswordRequest } from "../model/forget.password.request";
 import { RegisterRequest } from "../model/register.request";
+import {Axios, AxiosResponse} from "axios";
 
 class AuthenService {
 
-    authenticate(authenRequest: AuthenRequest):AuthResponse | undefined {
-        let authResponse;
-        Request.call(
+    authenticate(authenRequest: AuthenRequest): Promise<AxiosResponse<AuthResponse>> {
+        return Request.call(
             "/users/auth/login",
             'POST',
             authenRequest
         )
-        .then((response: any) => {
-            authResponse = response;
-        })
-        .catch(error => {
-            alert(error.message)
-        })
-        return authResponse;
     }
 
-    register(registerRequest: RegisterRequest): void {
-        Request.call(
+    register(registerRequest: RegisterRequest): Promise<AxiosResponse<any>> {
+        return Request.call(
             "/users/auth/register",
             'POST',
             registerRequest
-        )
-        .then((response: any) => {
-            alert(response.message)
-        })
-        .catch(error => {
-            alert(error.message)
-        })
+        );
     }
 
-    changePassword(changePasswordRequest: ChangePasswordRequest): void {
-        Request.call(
+    changePassword(changePasswordRequest: ChangePasswordRequest): Promise<AxiosResponse<any>> {
+        return Request.call(
             "/users/auth/change-password",
             'POST',
             changePasswordRequest
         )
-        .then((response: any) => {
-            alert(response.message)
-        })
-        .catch(error => {
-            alert(error.message)
-        });
     }
 
-    forgetPasswor(forgetPasswordRequest: ForgetPasswordRequest): void {
-        Request.call(
+    forgetPasswor(forgetPasswordRequest: ForgetPasswordRequest): Promise<AxiosResponse<any>> {
+        return Request.call(
             "/users/auth/forgot-password",
             'POST',
             forgetPasswordRequest
         )
-        .then((response: any) => {
-            alert(response.message)
-        })
-        .catch(error => {
-            alert(error.message)
-        })
     }
 
 }
